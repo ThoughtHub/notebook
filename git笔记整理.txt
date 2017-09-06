@@ -1,0 +1,93 @@
+Repository 仓库
+Star 收藏
+Fork 复制克隆项目
+Pull Request 发起请求
+Watch 关注
+Issue 事物卡片
+
+git Bash here 命令行流程
+实例：git仓库：https://github.com/ThoughtHub/test01/a.txt
+     本地仓库：D:\GitRepository\test01\a.txt
+     D:\GitRepository\.git .git隐藏文件的config文件配置
+
+	     [core]
+		repositoryformatversion = 0
+		filemode = false
+		bare = false
+		logallrefupdates = true
+		symlinks = false
+		ignorecase = true
+	     [remote "origin"]
+		url=https://github.com/ThoughtHub/test01.git
+		fetch= +refs/heads/*:refs/remotes/origin/*
+	     [branch "master"]
+		remote=origin
+		merge=refs/heads/master
+
+在git bash here修改
+查看使用的传输协议：git remote -v
+重新设置成ssh的方式：git remote rm origin
+		     git remote add origin https://github.com/ThoughtHub/test01.git
+		     git push -u origin master
+
+
+工作区working Directory到暂存区到git仓库git Repository
+本文实例文件操作（如上）a.txt
+1.在本地创建一个文件GitRepository，并在文件中打开git bash here
+2.首先在本地创建ssh key
+	$ ssh-keygen -t rsa -C "your_email@youremail.com" 
+  后面的your_email@youremail.com改为你在github上注册的邮箱，
+  之后会要求确认路径和输入密码，我们这使用默认的一路回车就行。 
+  成功的话会在~/下生成.ssh文件夹，进去，打开id_rsa.pub，复制里面的key。
+  回到github上，进入 Account Settings（账户配置），
+  左边选择SSH Keys，Add SSH Key,title随便填，粘贴在你电脑上生成的key。
+
+  为了验证是否成功，在git bash下输入：$ ssh -T git@github.com
+  如果是第一次的会提示是否continue，输入yes就会看到：
+  You've successfully authenticated, but GitHub does not provide shell access 。
+  这就表示已成功连上github。
+3.设置username和email
+	git config --global user.name "用户名"
+	git config --global user.email "邮箱"
+	git init初始化仓库，创建.git隐藏文件
+
+4.在https://github.com/ThoughtHub/下载test01项目
+	git clone https://github.com/ThoughtHub/test01.git
+	或者是别人的项目
+	git clone username@host:/path/to/repository
+
+5.打开文件 vi a.txt 然后修改 
+	vi命令操作：命令模式（command mode）、插入模式（Insert mode）和底行模式（last line mode）
+	切换至插入模式（Insert mode）编辑文件
+　　        在「命令行模式（command mode）」下按一下字母「i」就可以进入「插入模式（Insert mode）」，
+        这时候你就可以开始输入文字了
+	Insert 的切换
+　　	    您目前处于「插入模式（Insert mode）」，您就只能一直输入文字，如果您发现输错了字！
+	想用光标键往回移动，将该字删除，就要先按一下「ESC」键转到「命令行模式（command mode）」
+	再删除文字
+	    退出vi及保存文件
+　　    在「命令行模式（command mode）」下，按一下「：」冒号键进入「Last line mode」，例如：
+	: w filename （输入 「w filename」将文章以指定的文件名filename保存）
+	: wq (输入「wq」，存盘并退出vi)
+	: q! (输入q!， 不存盘强制退出vi)
+
+6.输入命令git add a.txt 把文件存入暂存区 可用git status 随时查看文件
+
+7.确认文件无误后输入命令git commit -m '提交文件的描述'
+
+8.上传至github服务器与项目同步：git push
+
+9.登入github查看文件
+
+
+常用命令
+pwd 查看当前位置
+clear 清屏
+mkdir a 创建一个文件a
+rm -rf a.txt 删除a.txt文件
+cat a.txt查看文件内容
+ls 查看文件
+
+
+
+
